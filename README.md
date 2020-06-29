@@ -9,7 +9,7 @@ It is done when django application is loaded. See apps.py for code reference.
 
 ### Schedule a one off job
 ```
-from apps import scheduler
+from .apps import scheduler
 from datetime import datetime, timedelta
 
 def foo(message, who):
