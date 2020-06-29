@@ -102,8 +102,7 @@ class DjangoJobStore(BaseJobStore):
                 next_run_time=serialize_dt(job.next_run_time),
                 job_state=pickle.dumps(job.__getstate__(), self.pickle_protocol)
             ),
-            name=job.id,
-            email_guid=req_obj
+            name=job.id
         )
 
         if not created:
