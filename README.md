@@ -4,10 +4,10 @@ This is a customoized implementation for django-apscheduler as the existing inpl
 This has been overcome by creating an additonal copy of job model which is then referred as foreign key for execution model and hence does not remove trace when the original job finishes.
 
 
-#Start the server
+### Start the server
 It is done when django application is loaded. See apps.py for code reference.
 
-#Schedule a one off job
+### Schedule a one off job
 ```
 #Add function to run at a certain time only once
 from apps import scheduler
