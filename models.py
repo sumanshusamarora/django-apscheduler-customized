@@ -5,7 +5,6 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 import time
 import logging
-from foo.models import bar
 
 LOGGER = logging.getLogger("django_apscheduler")
 
@@ -44,7 +43,6 @@ class DjangoJobManager(models.Manager):
 
 
 class DjangoJob(models.Model):
-    bar = models.ForeignKey(bar, on_delete=models.CASCADE, db_column='email_guid', default=1)
     name = models.CharField(max_length=255, unique=True)  # id of job
     next_run_time = models.DateTimeField(db_index=True, blank=True, null=True)
     # Perhaps consider using PickleField down the track.
@@ -60,7 +58,6 @@ class DjangoJob(models.Model):
 
 
 class DjangoJobCopy(models.Model):
-    bar = models.ForeignKey(bar, on_delete=models.CASCADE, db_column='email_guid', default=1)
     name = models.CharField(max_length=255, unique=True)  # id of job
     next_run_time = models.DateTimeField(db_index=True, blank=True, null=True)
     # Perhaps consider using PickleField down the track.
