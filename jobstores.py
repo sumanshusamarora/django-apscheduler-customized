@@ -15,7 +15,6 @@ from django.db.utils import OperationalError, ProgrammingError
 from django_apscheduler.models import DjangoJob, DjangoJobExecution, DjangoJobCopy
 from django_apscheduler.result_storage import DjangoResultStorage
 from django_apscheduler.util import deserialize_dt, serialize_dt
-from event.models import RequestTrace, RollOvers, DrawDown
 
 
 def ignore_database_error(on_error_value=None):
@@ -90,24 +89,12 @@ class DjangoJobStore(BaseJobStore):
     @ignore_database_error()
 
     def add_job(self, job):
-        event_id = job.name.split("||")[1]
-        event_type = job.name.split("||")[2]
-        try:
-            if event_type == 'DD':
-                evnt_obj = DrawDown.objects.get(id=int(event_id))
-            elif event_type == 'RO':
-                evnt_obj = RollOvers.objects.get(id=int(event_id))
-        except:
-            pass
-        req_obj = evnt_obj.request
-
         dbJob, created = DjangoJob.objects.get_or_create(
             defaults=dict(
                 next_run_time=serialize_dt(job.next_run_time),
                 job_state=pickle.dumps(job.__getstate__(), self.pickle_protocol)
             ),
             name=job.id,
-            email_guid=req_obj
         )
 
         dbJob_copy, created_copy = DjangoJobCopy.objects.get_or_create(
