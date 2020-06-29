@@ -9,7 +9,6 @@ It is done when django application is loaded. See apps.py for code reference.
 
 ### Schedule a one off job
 ```
-#Add function to run at a certain time only once
 from apps import scheduler
 from datetime import datetime, timedelta
 
