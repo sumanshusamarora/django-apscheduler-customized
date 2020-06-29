@@ -2,7 +2,7 @@ from django.apps import AppConfig
 from django.conf import settings
 from apscheduler.schedulers.background import BackgroundScheduler
 from pytz import timezone
-from loan_iq.config import logging
+import logging
 logger = logging.getLogger(__name__)
 
 tz = timezone('Australia/Melbourne')
